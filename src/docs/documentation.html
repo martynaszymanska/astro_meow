@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Astro Meow</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div class="head">
+    <h1 id="main_title">Astro Meow - Dokumentacja Gry</h1>
+</div>
+<div class="description">
+    <h1>Opis działania gry</h1>
+    <div class="descr_content">
+        <div class="descr_text">
+            <p id="main_descr1">Gra Astro Meow przedstawia 8-bitowego kotka w kosmosie,
+                który leci na rakiecie i zdobywa kawałki pizzy, które później
+                przeliczane są na punkty. Główny bohater gry jednak musi
+                omijać przeszkody w postaci czarych dziur, które
+                napotyka co pewien czas.</p>
+
+            <p id="main_descr2">Kotek cały czas porusza się w przód i spada w dół. Aby poruszać się
+                w górę i uniknąć spadnięcia poza ekran gry (równoznaczne z zakończeniem gry),
+                musi on być kierowany w górę. W tym celu użytkownik musi nacisnąć spację.
+                Podczas sterowania kotem, trzeba zwrócić uwagę na to, aby nie wlecieć w fioletowy
+                obiekt przedstawiający czarną dziurę, która przy kolizji z kotem kończy grę.
+                Należy również pamiętać o tym, żeby systematycznie zbierać punkty w postaci pizzy.</p>
+
+            <p id="main_descr3">Użytkownik podejmuje działania takie jak:</p>
+            <ul>
+                <li>SPACJA dla rozpoczęcia gry w ekranie startowym</li>
+                <li>SPACJA dla podskoczenia kotkiem podczas rozgrywki</li>
+                <li>N dla rozpoczęcia nowej gry po przegranej</li>
+                <li>ESCAPE dla opuszczenia gry</li>
+                <li>Y dla opuszczenia gry w ekranie wyjściowym</li>
+                <li>N dla powrotu do ekranu startowego w ekranie wyjściowym</li>
+            </ul>
+        </div>
+
+        <div class="video">
+            <video width="475" height="475" autoplay muted>
+                <source src="astro_meow_gameplay.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="instr">
+    <h1>Instrukcja zbudowania w systemie macOS</h1>
+    <p>Nie posiadam możliwości załączenia plików zbudowanej gry ze względu na wymagania firmy Apple do podpisywania aplikacji odpowiednimi certyfikatami.</p>
+    <h3>1. Zainstaluj manager pakietów "brew":</h3>
+    <p><a href="https://brew.sh">Instrukcja</a></p>
+    <h3>2. Zainstaluj bibliotekę SDL2 z użyciem brew: (komendy do wpisania w terminalu)</h3>
+    <p>- brew install sdl2 <br>
+    - brew install sdl2_image <br>
+    - brew install sdl2_ttf <br></p>
+    <h3>3. Zainstaluj Rust:</h3>
+    <p><a href="https://www.rust-lang.org/tools/install">Instrukcja</a></p>
+    <h3>4. Zbuduj projekt: (komendy do wpisania w terminalu)</h3>
+    <p>- przenieś się do folderu z plikiem cargo <br>
+    - cargo build --release <br></p>
+    <h3>5. Uruchom grę:</h3>
+    <p>- skopiuj pliki src/res <strong>(WAŻNE! pliki muszą posiadać ścieżkę src/res)</strong> do target/release <br>
+    - uruchom plik astro_meow (unix)</p>
+</div>
+
+<div class="highlights">
+    <h1>Informacje o kodzie</h1>
+    <h2>Język programowania i biblioteki</h2>
+    <p class="language">Gra została napisana za pomocą języka Rust. Używa biblioteki
+        <a href="https://github.com/Rust-SDL2/rust-sdl2">SDL2</a>. Gra zrobiona jest z myślą o systemie MacOS, na nim również została testowana.</p>
+    <p id="object">Podczas pisania kodu zostało zaimplementowane object-oriented programming.
+        Dzięki temu wszystkie funkcje i elementy są odpowiednio rozdzielone – poprawia to
+        przejrzystość kodu.</p>
+
+    <p>Pliki gry zostały podzielone na 3 główne foldery:</p>
+    <ul>
+        <li>scene</li>
+        <li>engine</li>
+        <li>res</li>
+    </ul>
+    <p>oraz główny plik <strong>main.rs.</strong></p>
+
+    <p>Pliki w folderze <strong>scene</strong> są odpowiedzialne za wszelkie wyliczenia
+        nt. obecnego położenia elementów, które widzimy na ekranie. Oblicza również wszystkie
+        kolizje, które mają miejsce podczas rozgrywki.</p>
+
+    <p>Szczególnie plik <strong>mod</strong> znajdujący się w <strong>scene</strong>.
+        Kod w nim zawarty jest tym, który posiada wszystkie informacje nt. elementów (obiektów)
+        w grze oraz tego, co ma miejsce na ekranie. Funkcje dotyczące danych obiektów zostały
+        wydzielone do osobnych plików. Właśnie z pomocą tych funkcji, w <strong>mod</strong>
+        jest wyliczane wszystko związane z rozgrywką.</p>
+
+    <p>Pliki znajdujące się w <strong>engine</strong> odpowiedzialne są za wyświetlanie
+        odpowiednich elementów na ekranie. Engine przechowuje również obecny stan gry.</p>
+
+    <p><strong>res</strong> jest skrótem od resources i folder ten posiada w sobie kolejne foldery:</p>
+    <ul>
+        <li><strong>img</strong>, który przechowuje wszelkie grafiki używane w grze</li>
+        <li><strong>font</strong>, w którym przechowywany jest font używany w grze.</li>
+    </ul>
+
+    <p>W pliku <strong>main.rs</strong> zostało przygotowane i stworzone okno gry. Do tego
+        użyto biblioteki SDL2. Context sdl2 przy użyciu pętli <strong>loop</strong> wychwytuje
+        zdarzenia (Event), które następnie przekazywane są do <strong>scene</strong>,
+        a następnie do <strong>engine</strong>.</p>
+</div>
+
+<div class="footer">
+    <p>EPI | Wstęp do Programowania | Martyna Szymańska | Daniel Soons</p>
+    <p>WZIKS UJ | 2023</p>
+</div>
+
+</body>
+</html>
